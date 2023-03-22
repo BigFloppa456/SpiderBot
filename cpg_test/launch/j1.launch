@@ -1,0 +1,5 @@
+<launch>
+  <node name="l1j1" pkg="cpg_test" type="cpg_j1.py" output="screen"/>
+  <node name="l4j1" pkg="cpg_test" type="cpg_l4j1.py" output="screen"/>
+  
+</launch>
