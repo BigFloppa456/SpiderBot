@@ -4,8 +4,8 @@ import numpy as np
 pi = 3.141569
 amp = 1
 camp = 0.8
-phase = [pi, -pi/2]
-offset = np.array([pi/2,0])
+phase = [0,0]
+offset = np.array([0,0])
 coff = 0.01
 frequency = 0.1
 dt = 0.0001
@@ -27,16 +27,17 @@ def da(amp_target):
 def do(offset_target):
     return coff * (offset_target - offset)
 
-def update_values(amp_target = 0.2, offset_target = np.array([1.745,1.745]), frequency_target =  0.08, phase_offset_target = pi):
+def update_values(amp_target = 0.2, offset_target = np.array([1.5,1.5]), frequency_target =  [0.4,0.4], phase_offset_target = pi/2):
     global phase, amp, offset
     for i in range(2):
-        phase[i] = phase[i] + dp(frequency_target, i, phase, phase_offset_target) * dt
+        phase[i] = phase[i] + dp(frequency_target[i], i, phase, phase_offset_target) * dt
         
     amp = amp + da(amp_target) * dt
     offset = offset + do(offset_target)
     
 def output():
     return amp * np.sin(phase) + offset
+    # return amp * 1/3 * (np.sin(np.array(phase)) + np.sin(0.3*np.array(phase)) + np.sin(0.5*np.array(phase)))**2 + offset
 
 outputs = []
 n1 = []

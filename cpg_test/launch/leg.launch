@@ -1,6 +1,6 @@
 <launch>
-  <node name="j1" pkg="cpg_test" type="cpg_j1.py" output="screen"/>
-  <node name="j2" pkg="cpg_test" type="cpg_j2.py" output="screen"/>
-  <node name="leg" pkg="cpg_test" type="cpg_sub.py" output="screen"/>
+  <node name="j1" pkg="cpg_test" type="cpg_j1_42_walk.py" output="screen"/>
+  <node name="j2" pkg="cpg_test" type="cpg_j2_42_walk.py" output="screen"/>
+  <node name="leg" pkg="cpg_test" type="cpg_sub_42_walk.py" output="screen"/>
   
 </launch>

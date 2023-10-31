@@ -51,13 +51,13 @@ class CPG:
         self.l4j2 = 110
         self.l4j1 = 90
 
-        rospy.init_node("CPGj2")
+        rospy.init_node("CPGj1")
         #rate = rospy.Rate(76800)
-        self.rate = rospy.Rate(10000)
+        self.rate = rospy.Rate(15)
         self.j2=[self.l6j3,self.l6j2,self.l6j1,self.l5j3,self.l5j2,self.l5j1,self.l4j3,self.l4j2,self.l4j1]
 
-        self.pub1 = rospy.Publisher("leg1j2",Float64,queue_size=10)
-        self.pub2 = rospy.Publisher("leg4j2",Float64,queue_size=10)
+        self.pub1 = rospy.Publisher("leg1j1",Float64,queue_size=1)
+        self.pub2 = rospy.Publisher("leg4j1",Float64,queue_size=1)
     
     def dp(self,frequency, idx, phase_offset_target):
         if idx == 0:
@@ -71,7 +71,7 @@ class CPG:
     def do(self,offset_target):
         return self.coff * (offset_target - self.offset)
 
-    def update_values(self,amp_target = 0.2, offset_target = np.array([1.745,1.745]), frequency_target =  [0.4,0.4], phase_offset_target = pi/2):
+    def update_values(self,amp_target = 0.535, offset_target = np.array([1.439897,1.701696]), frequency_target = [0.2,0.2], phase_offset_target = pi):
 
         for i in range(2):
             self.phase[i] = self.phase[i] + self.dp(frequency_target[i], i, phase_offset_target) * self.dt
@@ -103,7 +103,7 @@ class CPG:
             self.msg2 = Float64()
             #self.msg1.data = self.print1(self.result[0])
             #self.msg2.data = self.print1(self.result[1])
-
+            #print(self.tf_res[1])
             self.msg1.data = self.tf_res[0]
             self.msg2.data = self.tf_res[1]
             #print(self.tf_res[0])
